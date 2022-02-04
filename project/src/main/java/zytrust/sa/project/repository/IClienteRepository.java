@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import zytrust.sa.project.entity.Cliente;
 
 @Repository
-public interface ClienteRepository extends JpaRepository<Cliente,String> {
+public interface IClienteRepository extends JpaRepository<Cliente,String> {
 
 }

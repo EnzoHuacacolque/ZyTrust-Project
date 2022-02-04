@@ -50,6 +50,5 @@ public class Cliente {
 
     public Cliente() {}
 
-    //Relaciones
 
 }

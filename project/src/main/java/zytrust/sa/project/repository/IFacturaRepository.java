@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import zytrust.sa.project.entity.Factura;
 
 @Repository
-public interface FacturaRepository extends JpaRepository<Factura,String> {
+public interface IFacturaRepository extends JpaRepository<Factura,String> {
 }

@@ -48,7 +48,6 @@ public class Factura {
         this.fechapago = fechapago;
     }
     //Relaciones
-    //Relaciones
     @ManyToOne
     @JoinColumn(name ="CLIE_ID")
     private Cliente cliente;
