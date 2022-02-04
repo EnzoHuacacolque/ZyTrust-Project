@@ -33,21 +33,22 @@ public class FacturaController {
         }
     }
 
-    //Leer todas las facturas
+    //Buscar todas las facturas
     @GetMapping
     public ResponseEntity<List<Factura>> buscarFacturas(@PathVariable(value = "id")String factura_id){
         return ResponseEntity.ok(facturaService.findAll());
     }
 
-    //Leer una factura por Id
+    //Buscar una factura por Id
     @GetMapping("/{id}")
-    public ResponseEntity<List<Factura>> buscarFactura(@PathVariable(value ="id") String factura_id){
+    public ResponseEntity<List<Factura>> buscarFacturaPorId(@PathVariable(value ="id") String factura_id){
         Optional<Factura> _factura = facturaService.findbyId(factura_id);
 
         if(!_factura.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(_factura);
+        //return ResponseEntity.ok(_factura);
+        return null;
     }
 
 
