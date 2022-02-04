@@ -1,4 +1,9 @@
 package zytrust.sa.project.repository;
 
-public class DetalleRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import zytrust.sa.project.entity.Detalle;
+
+@Repository
+public interface DetalleRepository extends JpaRepository<Detalle,String> {
 }

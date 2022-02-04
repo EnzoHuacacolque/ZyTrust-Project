@@ -39,4 +39,11 @@ public class Detalle {
 
 
     //Relaciones
+    @ManyToOne
+    @JoinColumn(name = "PROD_ID") //Unión con Producto
+    private Producto producto;
+
+    @ManyToOne
+    @JoinColumn(name = "FACT_ID") //Unión con Factura
+    private Factura factura;
 }
