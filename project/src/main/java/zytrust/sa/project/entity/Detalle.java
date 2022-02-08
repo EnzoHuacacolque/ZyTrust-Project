@@ -1,4 +1,3 @@
-package zytrust.sa.project.entity;
 /*
  * @(#)Detalle.java
  *
@@ -8,15 +7,21 @@ package zytrust.sa.project.entity;
  * No se permite modificar, copiar ni difundir sin autorización
  * expresa de ZyTrust SA.
  */
+package zytrust.sa.project.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.math.BigInteger;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.util.Lazy;
 
 /**
- * Esta clase representa al detalle de las facturas al adquirir ciertos productos y debe ser usada para almacenar
+ * Esta clase representa al detalle de las facturas al adquirir ciertos productos
+ * y debe ser usada para almacenar
  * datos e intercambiarlos con otros objetos.
  *
  * @author Enzo Huacacolque Toledo
@@ -31,16 +36,16 @@ import lombok.ToString;
 public class Detalle {
 
     //Propiedades
-
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "DET_ID", length = 20)
     /**Identificador de los detalles de una factura*/
     private String id;
 
     @Column(name = "DET_CANTIDAD", length = 20)
     /**Cantidad de los productos en una factura*/
-    private String cantidad;
+    private BigInteger cantidad;
 
     @Column(name = "DET_IMPORTE", scale = 2, precision = 7)
     /**Importe de la factura*/
@@ -57,7 +62,7 @@ public class Detalle {
      * @param cantidad
      * @param importe
      * */
-    public Detalle(String id, String cantidad, BigDecimal importe) {
+    public Detalle(String id, BigInteger cantidad, BigDecimal importe) {
         this.id = id;
         this.cantidad = cantidad;
         this.importe = importe;
@@ -80,3 +85,11 @@ public class Detalle {
      */
     private Factura factura;
 }
+/*
+class DetallesId{
+
+    private String producto_id;
+    private String factura_id;
+
+}
+*/

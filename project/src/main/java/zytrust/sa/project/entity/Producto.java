@@ -15,9 +15,11 @@ import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
- * Esta clase representa a los productos registrados y debe ser usada para intercambiarlos con otros objetos.
+ * Esta clase representa a los productos registrados y debe ser usada para
+ * intercambiarlos con otros objetos.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022
@@ -32,9 +34,9 @@ import lombok.ToString;
 public class Producto {
 
     //Propiedades
-
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "PROD_ID", length = 20)
     /**Identificador del producto*/
     private String id;
@@ -48,7 +50,7 @@ public class Producto {
     private String descripcion;
 
     @Column(name = "PROD_CATEG", length = 20)
-    /**Categoría perteneciente a producto*/
+    /**Categoria perteneciente a producto*/
     private String categoria;
 
     @Column(name = "PROD_PRECIO", scale = 2, precision = 7)
@@ -68,7 +70,8 @@ public class Producto {
      * @param categoria
      * @param precio
      * */
-    public Producto(String id, String nombre, String descripcion, String categoria, BigDecimal precio) {
+    public Producto(String id, String nombre, String descripcion,
+                    String categoria, BigDecimal precio) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;

@@ -21,8 +21,8 @@ import zytrust.sa.project.entity.Factura;
 import zytrust.sa.project.repository.IFacturaRepository;
 
 /**
- * Esta clase representa las implementaciones de los servicios de la factura y debe ser utilizada para implementar las
- * funciones que se va a ejecutar en el controlador.
+ * Esta clase representa las implementaciones de los servicios de la factura y
+ * debe ser utilizada para implementar las funciones que se va a ejecutar en el controlador.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022

@@ -10,11 +10,13 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.time.LocalDate;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Esta clase representa a la factura y debe ser usada para almacenar
@@ -33,30 +35,32 @@ public class Factura {
 
     //Propiedades
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(name = "FACT_ID", length = 20)
     /**Identificador de la factura*/
     private String id;
 
     @Column(name = "FACT_ESTADO", nullable = false, length = 10)
-    /**Estado de emisión de la factura*/
+    /**Estado de emision de la factura*/
     private String estado;
 
     @Column(name = "FACT_DESCRIP", length = 100)
-    /**Descripción de la factura*/
+    /**Descripcion de la factura*/
     private String descripcion;
 
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "FACT_COD_NUM", nullable = false, length = 10)
-    /**Código numérico de la factura*/
-    private String codigonumerico;
+    /**Codigo numerico de la factura*/
+    private BigInteger codigoNumerico;
 
     @Column(name = "FACT_FECHA_EMISION")
     /**Fecha de emisión de la factura*/
-    private LocalDate fechaemision;
+    private LocalDate fechaEmision;
 
     @Column(name = "FACT_FECHA_PAGO")
     /**Fecha de pago de la factura*/
-    private LocalDate fechapago;
+    private LocalDate fechaPago;
 
     //Constructores
 
@@ -68,17 +72,18 @@ public class Factura {
      * @param id
      * @param estado
      * @param descripcion
-     * @param codigonumerico
-     * @param fechaemision
-     * @param fechapago
+     * @param codigoNumerico
+     * @param fechaEmision
+     * @param fechaPago
      * */
-    public Factura(String id, String estado, String descripcion, String codigonumerico, LocalDate fechaemision, LocalDate fechapago) {
+    public Factura(String id, String estado, String descripcion, BigInteger codigoNumerico,
+                   LocalDate fechaEmision, LocalDate fechaPago) {
         this.id = id;
         this.estado = estado;
         this.descripcion = descripcion;
-        this.codigonumerico = codigonumerico;
-        this.fechaemision = fechaemision;
-        this.fechapago = fechapago;
+        this.codigoNumerico = codigoNumerico;
+        this.fechaEmision = fechaEmision;
+        this.fechaPago = fechaPago;
     }
 
     //Relaciones
