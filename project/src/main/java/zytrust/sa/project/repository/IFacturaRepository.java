@@ -15,8 +15,8 @@ import org.springframework.stereotype.Repository;
 import zytrust.sa.project.entity.Factura;
 
 /**
- * Esta interfaz representa al repositorio de la factura y debe ser utilizada para implementar los
- * métodos JPA para el servicio.
+ * Esta interfaz representa al repositorio de la factura y
+ * debe ser utilizada para implementar los métodos JPA para el servicio.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022

@@ -37,35 +37,45 @@ public class DetalleServiceImpl implements IDetalleService {
 
     @Override
     @Transactional(readOnly = true)
-    /**Busca todos los detalles*/
+    /**Busca todos los detalles
+     * @return retorna todos los detalles
+     */
     public List<Detalle> findAll() {
         return detalleRepository.findAll();
     } //Posiblemente no necesario
 
     @Override
     @Transactional(readOnly = true)
-    /**Clasifica todos los detalles*/
+    /**Clasifica todos los detalles
+     * @param sort El filtro para clasificar
+     * @return retorna todos los detalles clasificados*/
     public List<Detalle> findAll(Sort sort) {
         return detalleRepository.findAll(sort);
     } //Posiblemente no necesario
 
     @Override
     @Transactional(readOnly = true)
-    /**Busca un detalle por su identificador*/
+    /**Busca un detalle por su identificador
+     * @param id el identificador
+     * @return retorna el detalle identificado*/
     public Optional<Detalle> findbyId(String id) {
         return detalleRepository.findById(id);
     }//Modificarlo a findDetalleByFactura
 
     @Override
-    @Transactional(readOnly = true)
-    /**Guarda un detalle*/
+    @Transactional
+    /**Guarda un detalle
+     * @param detalle el detalle a guardar
+     * @return Guarda los datos ingresados del detalle nuevo*/
     public Detalle save(Detalle detalle) {
         return detalleRepository.save(detalle);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    /**Elimina un detalle*/
+    @Transactional
+    /**Elimina un detalle
+     * @param id identificador del detalle
+     */
     public void deleteById(String id) {
         detalleRepository.deleteById(id);
     }

@@ -12,12 +12,8 @@ package zytrust.sa.project.entity;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.data.util.Lazy;
 
 /**
  * Esta clase representa al detalle de las facturas al adquirir ciertos productos
@@ -30,16 +26,14 @@ import org.springframework.data.util.Lazy;
 
 @Entity
 @Table(name = "FAC_DETALLES")
-@Getter
-@Setter
-@ToString
+@Data
 public class Detalle {
 
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "DET_ID", length = 20)
+    @Column(name = "DET_ID", length = 50)
     /**Identificador de los detalles de una factura*/
     private String id;
 

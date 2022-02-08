@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Esta clase representa al controlador del producto y debe ser usada para interactuar
- * con el servicio del producto mediante solicitudes en Http.
+ * Esta clase representa al controlador del producto y
+ * debe ser usada para interactuar con el servicio del producto
+ * mediante solicitudes en Http.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022

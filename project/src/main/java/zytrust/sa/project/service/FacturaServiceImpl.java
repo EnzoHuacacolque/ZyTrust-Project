@@ -57,14 +57,16 @@ public class FacturaServiceImpl implements IFacturaService {
     }
 
     @Override
-    @Transactional(readOnly = true)
-    /**Guarda una factura*/
+    @Transactional
+    /**Guarda una factura
+     * @return Guarda los datos ingresados de la factura nueva
+     */
     public Factura save(Factura factura) {
         return facturaRepository.save(factura);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     /**Elimina una factura*/
     public void deleteById(String id) {
         facturaRepository.deleteById(id);

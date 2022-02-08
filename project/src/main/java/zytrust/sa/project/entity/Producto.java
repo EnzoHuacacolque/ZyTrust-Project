@@ -11,10 +11,7 @@ package zytrust.sa.project.entity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -28,16 +25,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FAC_PRODUCTOS")
-@Getter
-@Setter
-@ToString
+@Data
 public class Producto {
 
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "PROD_ID", length = 20)
+    @Column(name = "PROD_ID", length = 50)
     /**Identificador del producto*/
     private String id;
 

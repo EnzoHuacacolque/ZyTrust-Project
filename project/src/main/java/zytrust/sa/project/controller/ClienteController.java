@@ -13,15 +13,14 @@ package zytrust.sa.project.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import zytrust.sa.project.entity.Cliente;
 import zytrust.sa.project.service.IClienteService;
 
 import java.net.URI;
+import java.util.List;
 
 /**
  * Esta clase representa al controlador del Cliente y debe ser usada para interactuar
@@ -45,15 +44,28 @@ public class ClienteController {
      * @return retorna una notificación de creación del cliente
      * @throws Exception retorna una notificación de error*/
     @PostMapping
-    public ResponseEntity<?> crearCliente(@RequestBody Cliente cliente){
-
+    public ResponseEntity<Cliente> crearCliente(@RequestBody @Validated Cliente cliente){
         try {
-            Cliente cliente_registrado = clienteService.save(cliente);
-            return ResponseEntity.created(new URI("/clientes/" + cliente_registrado.getId())).body(cliente_registrado);
+            Cliente clienteRegistrado = clienteService.save(cliente);
+            return ResponseEntity.created(new URI("/clientes" +
+                    clienteRegistrado.getId())).body(clienteRegistrado);
+            //return  ResponseEntity.ok(clienteRegistrado,HttpStatus.CREATED);
+            //return new ResponseEntity<Cliente>(clienteRegistrado,HttpStatus.CREATED);
+            //return ResponseEntity.status(HttpStatus.CREATED).body(clienteRegistrado);
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @GetMapping
+    /**Búsqueda de todos los clientes
+     * @return retorna todos los clientes
+     * @throws ResponseEntity retorna una notificación en donde comenta
+     * que no encontro ningun cliente
+     * */
+    public ResponseEntity<List<Cliente>> buscarTodosLosClientes(){
+        return ResponseEntity.ok(clienteService.findAll());
     }
 
 }

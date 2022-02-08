@@ -12,10 +12,7 @@ package zytrust.sa.project.entity;
 import javax.persistence.*;
 import java.math.BigInteger;
 import java.time.LocalDate;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -28,16 +25,14 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FAC_FACTURAS")
-@Getter
-@Setter
-@ToString
+@Data
 public class Factura {
 
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "FACT_ID", length = 20)
+    @Column(name = "FACT_ID", length = 50)
     /**Identificador de la factura*/
     private String id;
 

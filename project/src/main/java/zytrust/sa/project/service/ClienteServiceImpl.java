@@ -64,17 +64,20 @@ public class ClienteServiceImpl implements IClienteService {
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional
     /**Guarda al cliente registrado
      * @param cliente
-     * @return Guarda los datos ingresados del cliente nuevo*/
+     * @return Guarda los datos ingresados del cliente nuevo
+     */
     public Cliente save(Cliente cliente) {
         return clienteRepository.save(cliente);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    /**Elimina un cliente registrado*/
+    @Transactional
+    /**Elimina un cliente registrado
+     * @param id
+     */
     public void deleteById(String id) {
         clienteRepository.deleteById(id);
     }

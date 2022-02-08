@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Esta clase representa al controlador de los detalles de una factura y debe ser usada para interactuar
- * con el servicio de detalles mediante solicitudes en Http.
+ * Esta clase representa al controlador de los detalles de una factura y
+ * debe ser usada para interactuar con el servicio de detalles mediante
+ * solicitudes en Http.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022

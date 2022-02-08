@@ -18,8 +18,9 @@ import org.springframework.data.domain.Sort;
 import zytrust.sa.project.entity.Cliente;
 
 /**
- * Esta clase representa los servicios del cliente y debe ser utilizada para declarar las funciones que
- * se va a ejecutar en el controlador.
+ * Esta clase representa los servicios del cliente y debe
+ * ser utilizada para declarar las funciones que se va a ejecutar
+ * en el controlador.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022

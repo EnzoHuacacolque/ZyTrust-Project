@@ -18,7 +18,8 @@ import org.springframework.data.domain.Sort;
 import zytrust.sa.project.entity.Detalle;
 
 /**
- * Esta clase representa los servicios de los detalles de la factura y debe ser utilizada para declarar las funciones que
+ * Esta clase representa los servicios de los detalles de la factura y
+ * debe ser utilizada para declarar las funciones que
  * se van a ejecutar en el controlador.
  *
  * @author Enzo Huacacolque Toledo

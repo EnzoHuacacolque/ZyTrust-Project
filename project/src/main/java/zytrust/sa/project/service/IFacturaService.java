@@ -18,7 +18,8 @@ import org.springframework.data.domain.Sort;
 import zytrust.sa.project.entity.Factura;
 
 /**
- * Esta clase representa los servicios de la factura y debe ser utilizada para declarar las funciones que
+ * Esta clase representa los servicios de la factura y
+ * debe ser utilizada para declarar las funciones que
  * se van a ejecutar en el controlador.
  *
  * @author Enzo Huacacolque Toledo
@@ -30,15 +31,23 @@ public interface IFacturaService {
     /**Busca todas las facturas*/
     public List<Factura> findAll();
 
-    /**Clasifica todas las facturas*/
+    /**Clasifica todas las facturas
+     * @param sort
+     */
     public List<Factura> findAll(Sort sort);
 
-    /**Busca una factura por su identificador*/
+    /**Busca una factura por su identificador
+     * @param id
+     */
     public Optional<Factura> findbyId(String id);
 
-    /**Guarda una factura*/
+    /**Guarda una factura
+     * @param factura
+     */
     public Factura save(Factura factura);
 
-    /**Elimina una factura*/
+    /**Elimina una factura
+     * @param id
+     */
     public void deleteById(String id);
 }

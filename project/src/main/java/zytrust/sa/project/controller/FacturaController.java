@@ -42,31 +42,46 @@ public class FacturaController {
      * @return retorna el mensaje de registro del usuario
      * @throws Exception retorna un mensaje de error*/
     @PostMapping
-    public ResponseEntity<?> crearFactura(@RequestBody Factura factura){ /*Creación de una factura. También se puede usar "ResponseEntity<T>*/
-        //return ResponseEntity.status(HttpStatus.CREATED).body(facturaService.save(factura));
-
+    public ResponseEntity<?> crearFactura(@RequestBody Factura factura) {
         try {
-            Factura factura_registrada = facturaService.save(factura);
-            return ResponseEntity.created(new URI("/facturas/" + factura_registrada.getId())).body(factura_registrada);
+            Factura facturaRegistrada = facturaService.save(factura);
+            return ResponseEntity.created(new URI("/api/facturas" +
+                    facturaRegistrada.getId())).body(facturaRegistrada);
+            //return ResponseEntity.status(HttpStatus.CREATED).body(facturaRegistrada);
+        }   catch (Exception e) {
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
-        catch (Exception e){
+    }
+    //Buscar todas las facturas
+    @GetMapping
+    /**Búsqueda de todas las facturas
+     * @return retorna todas las facturas
+     * @throws ResponseEntity retorna una notificación en donde comenta
+     * que no encontró ninguna factura
+     * */
+    public ResponseEntity<List<Factura>> buscarTodasLasFacturas() {
+        try {
+            return ResponseEntity.ok(facturaService.findAll());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    //Buscar una factura por Id
+
+        //Buscar una factura por Id
     /**Búsqueda de una factura mediante su identificador
      * @return retorna la factura encontrada
-     * @throws ResponseEntity retorna una notificación en donde comenta que no encontró la factura
+     * @throws ResponseEntity retorna una notificación en donde comenta
+     * que no encontró la factura
      * */
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarFacturaPorId(@PathVariable(value ="id") String factura_id){
-        Optional<Factura> _factura = facturaService.findbyId(factura_id);
-
-        if(!_factura.isPresent()){
+        Optional<Factura> facturaIngresada = facturaService.findbyId(factura_id);
+        if(!facturaIngresada.isPresent()){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(_factura);
+        return ResponseEntity.ok(facturaIngresada);
 
     }
 

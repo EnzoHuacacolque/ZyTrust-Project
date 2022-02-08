@@ -22,7 +22,8 @@ import zytrust.sa.project.entity.Producto;
 import zytrust.sa.project.repository.IProductoRepository;
 
 /**
- * Esta clase representa las implementaciones de los servicios del cliente y debe ser utilizada para implementar las
+ * Esta clase representa las implementaciones de los servicios del cliente y
+ * debe ser utilizada para implementar las
  * funciones que se va a ejecutar en el controlador.
  *
  * @author Enzo Huacacolque Toledo
@@ -45,28 +46,37 @@ public class ProductoServiceImpl implements IProductoService {
 
     @Override
     @Transactional(readOnly = true)
-    /**Clasifica todos los productos*/
+    /**Clasifica todos los productos
+     *
+     */
     public List<Producto> findAll(Sort sort) {
         return productoRepository.findAll(sort);
     }
 
     @Override
     @Transactional(readOnly = true)
-    /**Busca un producto por su identificador*/
+    /**Busca un producto por su identificador
+     *
+     */
     public Optional<Producto> findbyId(String id) {
         return productoRepository.findById(id);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    /**Guarda un producto*/
+    @Transactional
+    /**Guarda un producto
+     * @param producto
+     * @return Guarda los datos ingresados del producto nuevo
+     */
     public Producto save(Producto producto) {
         return productoRepository.save(producto);
     }
 
     @Override
-    @Transactional(readOnly = true)
-    /**Elimina un producto*/
+    @Transactional
+    /**Elimina un producto
+     * @param id
+     */
     public void deleteById(String id) {
         productoRepository.deleteById(id);
     }
