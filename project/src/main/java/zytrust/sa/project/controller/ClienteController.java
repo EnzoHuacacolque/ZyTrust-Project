@@ -49,7 +49,7 @@ public class ClienteController {
 
         try {
             Cliente cliente_registrado = clienteService.save(cliente);
-            return ResponseEntity.created(new URI("/clientes/" + cliente_registrado.getId())).body(cliente_registrado);
+            return ResponseEntity.created(new URI("/facturas" + cliente_registrado.getId())).body(cliente_registrado);
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

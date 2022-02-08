@@ -30,24 +30,16 @@ public interface IClienteService {
     /**Busca a todos los clientes*/
     public List<Cliente> findAll(); //Posiblemente no necesario
 
-    /**Clasifica a todos los clientes
-     * @param sort
-     */
+    /**Clasifica a todos los clientes*/
     public List<Cliente> findAll(Sort sort); //Posiblemente no necesario
 
-    /**Busca a un cliente por su identificador
-     * @param id
-     */
+    /**Busca a un cliente por su identificador*/
     public Optional<Cliente> findbyId(String id);
 
-    /**Guarda al cliente registrado
-     * @param cliente
-     */
+    /**Guarda al cliente registrado*/
     public Cliente save(Cliente cliente);
 
-    /**Elimina un cliente registrado
-     * @param id
-     */
+    /**Elimina un cliente registrado*/
     public void deleteById(String id);
 
 }

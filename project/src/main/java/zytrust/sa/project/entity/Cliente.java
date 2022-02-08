@@ -15,7 +15,6 @@ import javax.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.GenericGenerator;
 
 /**
  * Esta clase representa a un cliente y debe ser usada para almacenar
@@ -34,9 +33,9 @@ import org.hibernate.annotations.GenericGenerator;
 public class Cliente {
 
     //Propiedades
+
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "CLIE_ID", length = 20)
     /**Identificador del Cliente*/
     private String id;
@@ -59,11 +58,11 @@ public class Cliente {
 
     @Column(name = "CLIE_TIP_DOC", length = 15)
     /**Tipo de Documento del cliente para identificación*/
-    private String tipoDoc;
+    private String tipo_doc;
 
     @Column(name = "CLIE_NUM_DOC", length = 25)
     /**Número del Documento del cliente para identificación*/
-    private String numDoc;
+    private String num_doc;
 
     //Constructores
     /**Constructor con propiedades del cliente
@@ -72,18 +71,17 @@ public class Cliente {
      * @param apellido
      * @param correo
      * @param telefono
-     * @param tipoDoc
-     * @param numDoc
+     * @param tipo_doc
+     * @param num_doc
      * */
-    public Cliente(String id, String nombre, String apellido, String correo,
-                   String telefono, String tipoDoc, String numDoc) {
+    public Cliente(String id, String nombre, String apellido, String correo, String telefono, String tipo_doc, String num_doc) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
         this.telefono = telefono;
-        this.tipoDoc = tipoDoc;
-        this.numDoc = numDoc;
+        this.tipo_doc = tipo_doc;
+        this.num_doc = num_doc;
     }
 
     /**Constructor vacío del cliente*/
