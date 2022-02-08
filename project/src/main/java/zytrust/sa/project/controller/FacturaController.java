@@ -47,7 +47,7 @@ public class FacturaController {
 
         try {
             Factura factura_registrada = facturaService.save(factura);
-            return ResponseEntity.created(new URI("/facturas" + factura_registrada.getId())).body(factura_registrada);
+            return ResponseEntity.created(new URI("/facturas/" + factura_registrada.getId())).body(factura_registrada);
         }
         catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

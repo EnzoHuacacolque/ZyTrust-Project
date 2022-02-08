@@ -22,8 +22,8 @@ import zytrust.sa.project.entity.Cliente;
 import zytrust.sa.project.repository.IClienteRepository;
 
 /**
- * Esta clase representa las implementaciones de los servicios del cliente y debe ser utilizada para implementar las
- * funciones que se va a ejecutar en el controlador.
+ * Esta clase representa las implementaciones de los servicios del cliente y debe
+ * ser utilizada para implementar las funciones que se va a ejecutar en el controlador.
  *
  * @author Enzo Huacacolque Toledo
  * @version 1, 07/02/2022
@@ -38,28 +38,36 @@ public class ClienteServiceImpl implements IClienteService {
 
     @Override
     @Transactional(readOnly = true)
-    /**Busca a todos los clientes*/
+    /**Busca a todos los clientes
+     * @retun Retorna a todos los clientes
+     */
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
     } //Posiblemente no será necesario
 
     @Override
     @Transactional(readOnly = true)
-    /**Clasifica a todos los clientes*/
+    /**Clasifica a todos los clientes
+     * @param sort
+     * @retun Retorna a todos los clientes con la clasificación */
     public List<Cliente> findAll(Sort sort) {
         return clienteRepository.findAll(sort);
     }//Posiblemente no será necesario
 
     @Override
     @Transactional(readOnly = true)
-    /**Busca a un cliente por su identificador*/
+    /**Busca a un cliente por su identificador
+     * @param id
+     * @return Retorna al cliente identificado por su identificador*/
     public Optional<Cliente> findbyId(String id) {
         return clienteRepository.findById(id);
     }
 
     @Override
     @Transactional(readOnly = true)
-    /**Guarda al cliente registrado*/
+    /**Guarda al cliente registrado
+     * @param cliente
+     * @return Guarda los datos ingresados del cliente nuevo*/
     public Cliente save(Cliente cliente) {
         return clienteRepository.save(cliente);
     }

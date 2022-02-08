@@ -30,15 +30,23 @@ public interface IDetalleService {
     /**Busca todos los detalles*/
     public List<Detalle> findAll();
 
-    /**Clasifica todos los detalles*/
+    /**Clasifica todos los detalles
+     * @param sort
+     */
     public List<Detalle> findAll(Sort sort);
 
-    /**Busca un detalle por su identificador*/
+    /**Busca un detalle por su identificador
+     * @param id
+     */
     public Optional<Detalle> findbyId(String id);
 
-    /**Guarda un detalle*/
+    /**Guarda un detalle
+     * @param detalle
+     */
     public Detalle save(Detalle detalle);
 
-    /**Elimina un detalle*/
+    /**Elimina un detalle
+     * @param id
+     */
     public void deleteById(String id);
 }
