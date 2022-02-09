@@ -11,7 +11,10 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -25,6 +28,8 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FAC_CLIENTES")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class Cliente {
 
@@ -36,53 +41,30 @@ public class Cliente {
     /**Identificador del Cliente*/
     private String id;
 
-    @Column(name = "CLIE_NOMBRE", length = 25)
+    @Column(name = "CLIE_NOMBRE", nullable = false, length = 25)
     /**Nombre del cliente*/
     private String nombre;
 
-    @Column(name = "CLIE_APELLIDO", length = 25)
+    @Column(name = "CLIE_APELLIDO", nullable = false, length = 25)
     /**Apellido del cliente*/
     private String apellido;
 
-    @Column(name = "CLIE_CORREO", length = 40)
+    @Column(name = "CLIE_CORREO", nullable = false, length = 40)
     /**Correo electrónico del cliente*/
     private String correo;
 
-    @Column(name = "CLIE_TELEF", length = 15)
+    @Column(name = "CLIE_TELEF", nullable = false, length = 15)
     /**Teléfono del cliente*/
     private String telefono;
 
-    @Column(name = "CLIE_TIP_DOC", length = 15)
+    @Column(name = "CLIE_TIP_DOC", nullable = false, length = 15)
     /**Tipo de Documento del cliente para identificación*/
     private String tipoDoc;
 
-    @Column(name = "CLIE_NUM_DOC", length = 25)
+    @Column(name = "CLIE_NUM_DOC", nullable = false, length = 25)
     /**Número del Documento del cliente para identificación*/
     private String numDoc;
 
-    //Constructores
-    /**Constructor con propiedades del cliente
-     * @param id
-     * @param nombre
-     * @param apellido
-     * @param correo
-     * @param telefono
-     * @param tipoDoc
-     * @param numDoc
-     * */
-    public Cliente(String id, String nombre, String apellido, String correo,
-                   String telefono, String tipoDoc, String numDoc) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.correo = correo;
-        this.telefono = telefono;
-        this.tipoDoc = tipoDoc;
-        this.numDoc = numDoc;
-    }
-
-    /**Constructor vacío del cliente*/
-    public Cliente() {}
 
 
 }
