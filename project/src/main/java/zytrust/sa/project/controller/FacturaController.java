@@ -9,15 +9,12 @@
  */
 package zytrust.sa.project.controller;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import zytrust.sa.project.entity.Factura;
 import zytrust.sa.project.service.IFacturaService;
 
@@ -37,13 +34,15 @@ public class FacturaController {
     /**Servicio de Factura*/
     private IFacturaService facturaService;
 
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(FacturaController.class);
+
     //Crear una nueva factura
     /**Creación de una nueva Factura
      * @return retorna el mensaje de registro del usuario
      * @throws Exception retorna un mensaje de error*/
     @PostMapping
     public ResponseEntity<?> crearFactura(@RequestBody Factura factura) {
-
+            logger.info("creando la factura de los siguientes datos {}",factura.toString());
             return ResponseEntity.status(HttpStatus.CREATED).body(facturaService.save(factura));
     }
     //Buscar todas las facturas

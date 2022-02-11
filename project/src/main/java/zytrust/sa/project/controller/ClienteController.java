@@ -9,18 +9,17 @@
  */
 package zytrust.sa.project.controller;
 
-
+import java.util.List;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import zytrust.sa.project.entity.Cliente;
 import zytrust.sa.project.service.IClienteService;
 
-import java.net.URI;
-import java.util.List;
+
 
 /**
  * Esta clase representa al controlador del Cliente y debe ser usada para interactuar
@@ -38,6 +37,8 @@ public class ClienteController {
     /**Servicio del Cliente*/
     private IClienteService clienteService;
 
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(ClienteController.class);
+
     //Crear un nuevo cliente
     //También se puede usar "ResponseEntity<T>
     /**Creación de un cliente.
@@ -45,6 +46,7 @@ public class ClienteController {
      * @throws Exception retorna una notificación de error*/
     @PostMapping
     public ResponseEntity<Cliente> crearCliente(@RequestBody @Validated Cliente cliente){
+        logger.info("creando el cliente de los siguientes datos {}",cliente.toString());
             Cliente clienteRegistrado = clienteService.save(cliente);
             return ResponseEntity.status(HttpStatus.CREATED).body(clienteRegistrado);
     }
