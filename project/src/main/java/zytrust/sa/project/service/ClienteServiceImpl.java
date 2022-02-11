@@ -19,6 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import zytrust.sa.project.entity.Cliente;
+import zytrust.sa.project.entity.Factura;
+import zytrust.sa.project.exceptions.CodigoError;
+import zytrust.sa.project.exceptions.ZyTrustException;
 import zytrust.sa.project.repository.IClienteRepository;
 
 /**
@@ -60,6 +63,13 @@ public class ClienteServiceImpl implements IClienteService {
      * @param id
      * @return Retorna al cliente identificado por su identificador*/
     public Optional<Cliente> findbyId(String id) {
+        //Validar la existencia del cliente
+        Optional<Cliente> clienteIngresado = clienteRepository.findById(id);
+        if(!clienteIngresado.isPresent()){
+            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+        }
+
+        //Buscar Cliente
         return clienteRepository.findById(id);
     }
 
@@ -70,6 +80,11 @@ public class ClienteServiceImpl implements IClienteService {
      * @return Guarda los datos ingresados del cliente nuevo
      */
     public Cliente save(Cliente cliente) {
+        ////Validar la existencia del cliente
+        Optional<Cliente> clienteIngresado = clienteRepository.findById(cliente.getId());
+        if(!clienteIngresado.isPresent()){
+            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+        }
         return clienteRepository.save(cliente);
     }
 

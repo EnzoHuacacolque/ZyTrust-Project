@@ -45,17 +45,8 @@ public class ClienteController {
      * @throws Exception retorna una notificación de error*/
     @PostMapping
     public ResponseEntity<Cliente> crearCliente(@RequestBody @Validated Cliente cliente){
-        try {
             Cliente clienteRegistrado = clienteService.save(cliente);
-            return ResponseEntity.created(new URI("/clientes" +
-                    clienteRegistrado.getId())).body(clienteRegistrado);
-            //return  ResponseEntity.ok(clienteRegistrado,HttpStatus.CREATED);
-            //return new ResponseEntity<Cliente>(clienteRegistrado,HttpStatus.CREATED);
-            //return ResponseEntity.status(HttpStatus.CREATED).body(clienteRegistrado);
-        }
-        catch (Exception e){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+            return ResponseEntity.status(HttpStatus.CREATED).body(clienteRegistrado);
     }
 
     @GetMapping

@@ -43,15 +43,8 @@ public class FacturaController {
      * @throws Exception retorna un mensaje de error*/
     @PostMapping
     public ResponseEntity<?> crearFactura(@RequestBody Factura factura) {
-        try {
-            Factura facturaRegistrada = facturaService.save(factura);
-            return ResponseEntity.created(new URI("/api/facturas" +
-                    facturaRegistrada.getId())).body(facturaRegistrada);
-            //return ResponseEntity.status(HttpStatus.CREATED).body(facturaRegistrada);
-        }   catch (Exception e) {
 
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+            return ResponseEntity.status(HttpStatus.CREATED).body(facturaService.save(factura));
     }
     //Buscar todas las facturas
     @GetMapping
@@ -61,11 +54,7 @@ public class FacturaController {
      * que no encontró ninguna factura
      * */
     public ResponseEntity<List<Factura>> buscarTodasLasFacturas() {
-        try {
             return ResponseEntity.ok(facturaService.findAll());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
     }
 
 
@@ -77,11 +66,8 @@ public class FacturaController {
      * */
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarFacturaPorId(@PathVariable(value ="id") String factura_id){
-        Optional<Factura> facturaIngresada = facturaService.findbyId(factura_id);
-        if(!facturaIngresada.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(facturaIngresada);
+
+        return ResponseEntity.ok(facturaService.findbyId(factura_id));
 
     }
 

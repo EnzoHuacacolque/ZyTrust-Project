@@ -14,10 +14,13 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import zytrust.sa.project.entity.Factura;
+import zytrust.sa.project.exceptions.CodigoError;
+import zytrust.sa.project.exceptions.ZyTrustException;
 import zytrust.sa.project.repository.IFacturaRepository;
 
 /**
@@ -53,6 +56,14 @@ public class FacturaServiceImpl implements IFacturaService {
     @Transactional(readOnly = true)
     /**Busca una factura por su identificador*/
     public Optional<Factura> findbyId(String id) {
+
+        //Validar la existencia del cliente
+        Optional<Factura> facturaIngresada = facturaRepository.findById(id);
+        if(!facturaIngresada.isPresent()){
+            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+        }
+
+        //Busqueda de la factura
         return facturaRepository.findById(id);
     }
 
@@ -62,6 +73,13 @@ public class FacturaServiceImpl implements IFacturaService {
      * @return Guarda los datos ingresados de la factura nueva
      */
     public Factura save(Factura factura) {
+        //Validar la existencia del cliente
+        Optional<Factura> facturaIngresada = facturaRepository.findById(factura.getId());
+        if(!facturaIngresada.isPresent()){
+            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+        }
+
+        //Crear Factura
         return facturaRepository.save(factura);
     }
 
