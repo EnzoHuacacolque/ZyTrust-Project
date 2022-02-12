@@ -10,6 +10,7 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
@@ -32,7 +33,10 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Detalle {
+public class Detalle implements Serializable {
+
+    /**UID Serializable*/
+    private static final long serialVersionUID = 1L;
 
     //Propiedades
     @Id

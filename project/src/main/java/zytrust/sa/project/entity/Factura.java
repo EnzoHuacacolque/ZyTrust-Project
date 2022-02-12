@@ -10,6 +10,7 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
 
@@ -31,7 +32,10 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Factura {
+public class Factura implements Serializable {
+
+    /**UID Serializable*/
+    private static final long serialVersionUID = 1L;
 
     //Propiedades
     @Id

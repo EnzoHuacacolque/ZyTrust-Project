@@ -1,27 +1,17 @@
 package zytrust.sa.project.dto;
 
-import java.io.Serializable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+public interface ClienteDTO{
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class ClienteDTO implements Serializable {
+    String getNombre();
 
-    private String id;
+    String getApellido();
 
-    private String nombre;
+    String getCorreo();
 
-    private String apellido;
+    String getTelefono();
 
-    private String correo;
+    String getNumDoc();
 
-    private String telefono;
-
-    private String tipoDoc;
-
-    private String numDoc;
+    String getTipoDoc();
 
 }

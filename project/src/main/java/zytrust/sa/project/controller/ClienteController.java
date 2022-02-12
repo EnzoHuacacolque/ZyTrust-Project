@@ -58,6 +58,7 @@ public class ClienteController {
      * que no encontro ningun cliente
      * */
     public ResponseEntity<List<Cliente>> buscarTodosLosClientes(){
+        logger.debug("Obteniendo todos los clientes");
         return ResponseEntity.ok(clienteService.findAll());
     }
 

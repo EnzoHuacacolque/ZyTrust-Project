@@ -53,7 +53,8 @@ public class FacturaController {
      * que no encontró ninguna factura
      * */
     public ResponseEntity<List<Factura>> buscarTodasLasFacturas() {
-            return ResponseEntity.ok(facturaService.findAll());
+        logger.debug("Obteniendo todas las facturas");
+        return ResponseEntity.ok(facturaService.findAll());
     }
 
 
@@ -65,7 +66,7 @@ public class FacturaController {
      * */
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarFacturaPorId(@PathVariable(value ="id") String factura_id){
-
+        logger.debug("Obteniendo la factura a identificar");
         return ResponseEntity.ok(facturaService.findbyId(factura_id));
 
     }

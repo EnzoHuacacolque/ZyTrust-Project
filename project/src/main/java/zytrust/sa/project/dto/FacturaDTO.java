@@ -1,29 +1,22 @@
 package zytrust.sa.project.dto;
 
-import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class FacturaDTO implements Serializable {
+public interface FacturaDTO {
 
-    private String id;
 
-    private String estado;
+    String getEstado();
 
-    private String descripcion;
+    String getDescripcion();
 
-    private BigInteger codigoNumerico;
+    BigInteger getCodigoNumerico();
 
-    private LocalDate fechaEmision;
+    LocalDate getFechaEmision();
 
-    private LocalDate fechaPago;
+    LocalDate getFechaPago();
 
-    private String cliente_id;
+    String getClienteId();
+
 
 }

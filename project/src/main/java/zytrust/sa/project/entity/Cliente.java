@@ -11,11 +11,13 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
-
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
+
+
 
 /**
  * Esta clase representa a un cliente y debe ser usada para almacenar
@@ -31,7 +33,10 @@ import org.hibernate.annotations.GenericGenerator;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Cliente {
+public class Cliente implements Serializable {
+
+    /**UID Serializable*/
+    private static final long serialVersionUID = 1L;
 
     //Propiedades
     @Id

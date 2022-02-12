@@ -1,25 +1,19 @@
 package zytrust.sa.project.dto;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class DetalleDTO implements Serializable {
 
-    private String id;
 
-    private BigInteger cantidad;
+public interface DetalleDTO {
 
-    private BigDecimal importe;
 
-    private String factura_id;
+    BigInteger getCantidad();
 
-    private String producto_id;
+    BigDecimal getImporte();
+
+    String getFacturaID();
+
+    String getProductoId();
 
 }
