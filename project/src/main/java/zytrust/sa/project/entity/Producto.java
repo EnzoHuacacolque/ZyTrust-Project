@@ -12,7 +12,9 @@ package zytrust.sa.project.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -61,4 +63,11 @@ public class Producto implements Serializable {
     /**Precio unitario del producto*/
     private BigDecimal precio;
 
+
+    //Relaciones
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PROD_ID")
+    @JsonIgnore
+    /**Relación con la clase Detalles*/
+    private List<Detalle> detalles;
 }

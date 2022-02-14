@@ -12,6 +12,9 @@ package zytrust.sa.project.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -70,6 +73,10 @@ public class Cliente implements Serializable {
     /**Número del Documento del cliente para identificación*/
     private String numDoc;
 
-
-
+    //Relaciones
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "CLIE_ID")
+    @JsonIgnore
+    /**Relación con la clase Facturas*/
+    private List<Factura> facturas;
 }

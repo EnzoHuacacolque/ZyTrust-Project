@@ -10,16 +10,19 @@
 
 package zytrust.sa.project.service;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import zytrust.sa.project.dto.ClienteDTO;
 import zytrust.sa.project.entity.Cliente;
-import zytrust.sa.project.entity.Factura;
 import zytrust.sa.project.exceptions.CodigoError;
 import zytrust.sa.project.exceptions.ZyTrustException;
 import zytrust.sa.project.repository.IClienteRepository;
@@ -39,6 +42,8 @@ public class ClienteServiceImpl implements IClienteService {
     /**Repositorio del Cliente*/
     private IClienteRepository clienteRepository;
 
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(ClienteServiceImpl.class);
+
     @Override
     @Transactional(readOnly = true)
     /**Busca a todos los clientes
@@ -46,7 +51,7 @@ public class ClienteServiceImpl implements IClienteService {
      */
     public List<Cliente> findAll() {
         return clienteRepository.findAll();
-    } //Posiblemente no será necesario
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -55,7 +60,7 @@ public class ClienteServiceImpl implements IClienteService {
      * @retun Retorna a todos los clientes con la clasificación */
     public List<Cliente> findAll(Sort sort) {
         return clienteRepository.findAll(sort);
-    }//Posiblemente no será necesario
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -66,6 +71,7 @@ public class ClienteServiceImpl implements IClienteService {
         //Validar la existencia del cliente
         Optional<Cliente> clienteIngresado = clienteRepository.findById(id);
         if(!clienteIngresado.isPresent()){
+            logger.debug("No se encontró al cliente con el identificador{}",clienteIngresado.get().getId());
             throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
         }
 
@@ -79,13 +85,21 @@ public class ClienteServiceImpl implements IClienteService {
      * @param cliente
      * @return Guarda los datos ingresados del cliente nuevo
      */
-    public Cliente save(Cliente cliente) {
-        ////Validar la existencia del cliente
+    public Cliente create(Cliente cliente) {
+        ////Validar el uso del ID
         Optional<Cliente> clienteIngresado = clienteRepository.findById(cliente.getId());
-        if(!clienteIngresado.isPresent()){
-            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+        if(clienteIngresado.isPresent()){
+            logger.debug("El identificador insertado ya esta siendo utilizado");
+            throw new ZyTrustException(CodigoError.ID_UTILIZADO);
         }
-        return clienteRepository.save(cliente);
+
+        //Creación del cliente
+        try {
+            return clienteRepository.save(cliente);
+        }catch (Exception e){
+            logger.debug("No se pudo almacenar el cliente");
+            throw new ZyTrustException(CodigoError.PROBLEMAS_ALMACENAR_CLIENTE);
+        }
     }
 
     @Override
@@ -96,4 +110,19 @@ public class ClienteServiceImpl implements IClienteService {
     public void deleteById(String id) {
         clienteRepository.deleteById(id);
     }
+
+
+    //DTO
+
+    @Override
+    @Transactional(readOnly = true)
+    /**Busca a todos los clientes
+     * @retun Retorna a todos los clientes
+     */
+    public List<ClienteDTO> findAllClienteDTO() {
+
+        return clienteRepository.findAllClienteDTO();
+    }
+
+
 }

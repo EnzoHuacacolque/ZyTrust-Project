@@ -14,4 +14,6 @@ public interface ClienteDTO{
 
     String getTipoDoc();
 
+    Integer getNumFacturas();
+
 }

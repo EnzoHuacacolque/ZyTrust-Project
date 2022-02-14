@@ -12,9 +12,8 @@ package zytrust.sa.project.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.springframework.data.domain.Sort;
-
+import zytrust.sa.project.dto.FacturaDTO;
 import zytrust.sa.project.entity.Factura;
 
 /**
@@ -43,6 +42,7 @@ public interface IFacturaService {
 
     /**Guarda una factura
      * @param factura
+     * @return
      */
     public Factura save(Factura factura);
 
@@ -50,4 +50,6 @@ public interface IFacturaService {
      * @param id
      */
     public void deleteById(String id);
+
+    public List<FacturaDTO> findAllFacturaDTO();
 }

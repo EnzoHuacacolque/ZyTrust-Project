@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import zytrust.sa.project.dto.ClienteDTO;
+import zytrust.sa.project.dto.FacturaDTO;
 import zytrust.sa.project.entity.Factura;
 import zytrust.sa.project.service.IFacturaService;
 
@@ -68,9 +70,18 @@ public class FacturaController {
     public ResponseEntity<?> buscarFacturaPorId(@PathVariable(value ="id") String factura_id){
         logger.debug("Obteniendo la factura a identificar");
         return ResponseEntity.ok(facturaService.findbyId(factura_id));
-
     }
 
+    @GetMapping(value = "DTO")
+    /**Búsqueda de todas las facturas DTO
+     * @return retorna todas las facturas DTO
+     * @throws ResponseEntity retorna una notificación en donde comenta
+     * que no encontro ninguna factura DTO
+     * */
+    public List<FacturaDTO> buscarFacturaDTO(){
+        logger.debug("Obteniendo las Facturas DTO");
+        return facturaService.findAllFacturaDTO();
+    }
 
 
 }

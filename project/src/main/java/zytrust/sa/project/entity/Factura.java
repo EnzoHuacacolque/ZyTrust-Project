@@ -13,7 +13,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -73,5 +75,11 @@ public class Factura implements Serializable {
     @JoinColumn(name ="CLIE_ID")
     /**Relación con la clase Cliente*/
     private Cliente cliente;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FACT_ID")
+    @JsonIgnore
+    /**Relación con la clase Detalles*/
+    private List<Detalle> detalles;
 
 }

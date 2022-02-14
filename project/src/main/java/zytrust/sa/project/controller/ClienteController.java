@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import zytrust.sa.project.dto.ClienteDTO;
 import zytrust.sa.project.entity.Cliente;
 import zytrust.sa.project.service.IClienteService;
 
@@ -47,7 +48,7 @@ public class ClienteController {
     @PostMapping
     public ResponseEntity<Cliente> crearCliente(@RequestBody @Validated Cliente cliente){
         logger.info("creando el cliente de los siguientes datos {}",cliente.toString());
-            Cliente clienteRegistrado = clienteService.save(cliente);
+            Cliente clienteRegistrado = clienteService.create(cliente);
             return ResponseEntity.status(HttpStatus.CREATED).body(clienteRegistrado);
     }
 
@@ -60,6 +61,24 @@ public class ClienteController {
     public ResponseEntity<List<Cliente>> buscarTodosLosClientes(){
         logger.debug("Obteniendo todos los clientes");
         return ResponseEntity.ok(clienteService.findAll());
+    }
+
+    @GetMapping(value = "DTO")
+    /**Búsqueda de todos los clientes DTO
+     * @return retorna todos los clientes DTO
+     * @throws ResponseEntity retorna una notificación en donde comenta
+     * que no encontro ningun cliente DTO
+     * */
+    public List<ClienteDTO> buscarClienteDTO(){
+        logger.debug("Obteniendo los Clientes DTO");
+        return clienteService.findAllClienteDTO();
+    }
+
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarClientePorId(@PathVariable(value ="id") String cliente_id){
+        logger.debug("Obteniendo la factura a identificar");
+        return ResponseEntity.ok(clienteService.findbyId(cliente_id));
     }
 
 }
