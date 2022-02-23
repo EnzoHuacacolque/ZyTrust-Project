@@ -9,7 +9,7 @@ CREATE TABLE `fac_clientes` (
 PRIMARY KEY (`clie_id`)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `fac_detalles` (
+CREATE TABLE `fac_facturas` (
 `det_id` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
 `det_cantidad` decimal(19,2) NOT NULL,
 `det_importe` decimal(7,2) NOT NULL,

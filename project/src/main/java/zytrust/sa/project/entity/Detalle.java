@@ -42,7 +42,7 @@ public class Detalle implements Serializable {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid2")
-    @Column(name = "DET_ID", nullable = false, length = 50)
+    @Column(name = "DET_ID", length = 50)
     /**Identificador de los detalles de una factura*/
     private String id;
 

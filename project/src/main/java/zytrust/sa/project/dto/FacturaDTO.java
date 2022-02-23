@@ -18,8 +18,6 @@ public interface FacturaDTO {
 
     String getClienteId();
 
-    String getDetallesId();
-
     String getNumProductos();
 
 

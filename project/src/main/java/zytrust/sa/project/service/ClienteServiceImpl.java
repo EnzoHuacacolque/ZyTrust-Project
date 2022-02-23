@@ -70,8 +70,8 @@ public class ClienteServiceImpl implements IClienteService {
     public Optional<Cliente> findbyId(String id) {
         //Validar la existencia del cliente
         Optional<Cliente> clienteIngresado = clienteRepository.findById(id);
-        if(!clienteIngresado.isPresent()){
-            logger.debug("No se encontró al cliente con el identificador{}",clienteIngresado.get().getId());
+        if(clienteIngresado.isEmpty()){
+            logger.debug("No se encontró al cliente con el identificador {}",id);
             throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
         }
 

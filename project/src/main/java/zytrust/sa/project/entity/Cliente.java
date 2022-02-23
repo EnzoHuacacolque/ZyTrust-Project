@@ -44,8 +44,8 @@ public class Cliente implements Serializable {
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "CLIE_ID", length = 50, nullable = false)
+    @GenericGenerator(name="system-uuid", strategy = "uuid2")
+    @Column(name = "CLIE_ID", length = 50)
     /**Identificador del Cliente*/
     private String id;
 

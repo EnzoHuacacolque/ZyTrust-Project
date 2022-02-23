@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Sort;
 import zytrust.sa.project.dto.FacturaDTO;
+import zytrust.sa.project.dto.request.FacturaReq;
 import zytrust.sa.project.entity.Factura;
 
 /**
@@ -45,6 +46,12 @@ public interface IFacturaService {
      * @return
      */
     public Factura save(Factura factura);
+
+    /**Guarda una factura mediante Req
+     * @param facturaReq
+     * @return
+     */
+    public Factura createReq(FacturaReq facturaReq);
 
     /**Elimina una factura
      * @param id

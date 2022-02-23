@@ -19,6 +19,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import zytrust.sa.project.dto.FacturaDTO;
+import zytrust.sa.project.dto.request.FacturaReq;
+import zytrust.sa.project.entity.Cliente;
 import zytrust.sa.project.entity.Factura;
 import zytrust.sa.project.exceptions.CodigoError;
 import zytrust.sa.project.exceptions.ZyTrustException;
@@ -67,7 +69,7 @@ public class FacturaServiceImpl implements IFacturaService {
 
         //Validar la existencia de la factura
         Optional<Factura> facturaIngresada = facturaRepository.findById(id);
-        if(!facturaIngresada.isPresent()){
+        if(facturaIngresada.isEmpty()){
             throw new ZyTrustException(CodigoError.FACTURA_NO_EXISTE);
         }
 
@@ -89,26 +91,33 @@ public class FacturaServiceImpl implements IFacturaService {
             throw new ZyTrustException(CodigoError.ID_UTILIZADO);
         }
 
-        //Validar la existencia del cliente
-        /**Optional<Cliente> clienteIngresado = clienteRepository.findById(facturaReq.getCliente_id());
-        if(!clienteIngresado.isPresent()){
-            logger.debug("No se encontró al cliente con el identificador{}",clienteIngresado.get().getId());
-            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
-        }*/
-
-        //Factura factura1 = Factura.buider()
-
             //Crear Factura
-        /**try {
+        try {
             return facturaRepository.save(factura);
         }catch (Exception e){
             logger.debug("No se pudo almacenar la factura");
             throw new ZyTrustException(CodigoError.PROBLEMAS_ALMACENAR_FACTURA);
-        }*/
+        }
+
+
+
+    }
+
+    @Override
+    @Transactional
+    public Factura createReq(FacturaReq facturaReq) {
+        //Validar la existencia del cliente
+        Optional<Cliente> clienteIngresado = clienteRepository.findById(facturaReq.getCliente_id());
+         if(clienteIngresado.isEmpty()){
+            logger.debug("No se encontró al cliente con el identificador {}",facturaReq.getCliente_id());
+            throw new ZyTrustException(CodigoError.CLIENTE_NO_EXISTE);
+         }
+
+        Factura facturaCreada = new Factura();
+
+
 
         return null;
-
-
     }
 
     @Override

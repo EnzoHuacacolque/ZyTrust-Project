@@ -45,7 +45,8 @@ public class FacturaController {
     @PostMapping
     public ResponseEntity<?> crearFactura(@RequestBody Factura factura) {
             logger.info("creando la factura de los siguientes datos {}",factura.toString());
-            return ResponseEntity.status(HttpStatus.CREATED).body(facturaService.save(factura));
+            Factura facturaRegistrada = facturaService.save(factura);
+            return ResponseEntity.status(HttpStatus.CREATED).body(facturaRegistrada);
     }
     //Buscar todas las facturas
     @GetMapping

@@ -43,7 +43,7 @@ public class Factura implements Serializable {
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid2")
-    @Column(name = "FACT_ID", nullable = false, length = 50)
+    @Column(name = "FACT_ID",  length = 50)
     /**Identificador de la factura*/
     private String id;
 
