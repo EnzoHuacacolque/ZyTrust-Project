@@ -15,6 +15,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Sort;
 
+import zytrust.sa.project.dto.ClienteDTO;
 import zytrust.sa.project.entity.Cliente;
 
 /**
@@ -44,11 +45,15 @@ public interface IClienteService {
     /**Guarda al cliente registrado
      * @param cliente
      */
-    public Cliente save(Cliente cliente);
+    public Cliente create(Cliente cliente);
 
     /**Elimina un cliente registrado
      * @param id
      */
     public void deleteById(String id);
+
+    public List<ClienteDTO> findAllClienteDTO();
+
+
 
 }

@@ -10,9 +10,15 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -25,14 +31,19 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FAC_FACTURAS")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class Factura {
+public class Factura implements Serializable {
+
+    /**UID Serializable*/
+    private static final long serialVersionUID = 1L;
 
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    @Column(name = "FACT_ID", length = 50)
+    @GenericGenerator(name="system-uuid", strategy = "uuid2")
+    @Column(name = "FACT_ID",  length = 50)
     /**Identificador de la factura*/
     private String id;
 
@@ -44,42 +55,19 @@ public class Factura {
     /**Descripcion de la factura*/
     private String descripcion;
 
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "FACT_COD_NUM", nullable = false, length = 10)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @Column(name = "FACT_COD_NUM", nullable = false, length = 50)
     /**Codigo numerico de la factura*/
     private BigInteger codigoNumerico;
 
-    @Column(name = "FACT_FECHA_EMISION")
+    @Column(name = "FACT_FECHA_EMISION", nullable = false)
     /**Fecha de emisión de la factura*/
     private LocalDate fechaEmision;
 
-    @Column(name = "FACT_FECHA_PAGO")
+    @Column(name = "FACT_FECHA_PAGO", nullable = false)
     /**Fecha de pago de la factura*/
     private LocalDate fechaPago;
-
-    //Constructores
-
-    /**Constructor vacío de Factura*/
-    public Factura() {
-    }
-
-    /**Constructor con parámetros de Factura
-     * @param id
-     * @param estado
-     * @param descripcion
-     * @param codigoNumerico
-     * @param fechaEmision
-     * @param fechaPago
-     * */
-    public Factura(String id, String estado, String descripcion, BigInteger codigoNumerico,
-                   LocalDate fechaEmision, LocalDate fechaPago) {
-        this.id = id;
-        this.estado = estado;
-        this.descripcion = descripcion;
-        this.codigoNumerico = codigoNumerico;
-        this.fechaEmision = fechaEmision;
-        this.fechaPago = fechaPago;
-    }
 
     //Relaciones
 
@@ -87,5 +75,11 @@ public class Factura {
     @JoinColumn(name ="CLIE_ID")
     /**Relación con la clase Cliente*/
     private Cliente cliente;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FACT_ID")
+    @JsonIgnore
+    /**Relación con la clase Detalles*/
+    private List<Detalle> detalles;
 
 }

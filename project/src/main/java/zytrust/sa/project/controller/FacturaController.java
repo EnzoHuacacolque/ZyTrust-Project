@@ -9,15 +9,14 @@
  */
 package zytrust.sa.project.controller;
 
-import java.net.URI;
 import java.util.List;
-import java.util.Optional;
-
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import zytrust.sa.project.dto.ClienteDTO;
+import zytrust.sa.project.dto.FacturaDTO;
 import zytrust.sa.project.entity.Factura;
 import zytrust.sa.project.service.IFacturaService;
 
@@ -37,21 +36,17 @@ public class FacturaController {
     /**Servicio de Factura*/
     private IFacturaService facturaService;
 
+    private static final Logger logger = org.slf4j.LoggerFactory.getLogger(FacturaController.class);
+
     //Crear una nueva factura
     /**Creación de una nueva Factura
      * @return retorna el mensaje de registro del usuario
      * @throws Exception retorna un mensaje de error*/
     @PostMapping
     public ResponseEntity<?> crearFactura(@RequestBody Factura factura) {
-        try {
+            logger.info("creando la factura de los siguientes datos {}",factura.toString());
             Factura facturaRegistrada = facturaService.save(factura);
-            return ResponseEntity.created(new URI("/api/facturas" +
-                    facturaRegistrada.getId())).body(facturaRegistrada);
-            //return ResponseEntity.status(HttpStatus.CREATED).body(facturaRegistrada);
-        }   catch (Exception e) {
-
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+            return ResponseEntity.status(HttpStatus.CREATED).body(facturaRegistrada);
     }
     //Buscar todas las facturas
     @GetMapping
@@ -61,11 +56,8 @@ public class FacturaController {
      * que no encontró ninguna factura
      * */
     public ResponseEntity<List<Factura>> buscarTodasLasFacturas() {
-        try {
-            return ResponseEntity.ok(facturaService.findAll());
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+        logger.debug("Obteniendo todas las facturas");
+        return ResponseEntity.ok(facturaService.findAll());
     }
 
 
@@ -77,14 +69,20 @@ public class FacturaController {
      * */
     @GetMapping("/{id}")
     public ResponseEntity<?> buscarFacturaPorId(@PathVariable(value ="id") String factura_id){
-        Optional<Factura> facturaIngresada = facturaService.findbyId(factura_id);
-        if(!facturaIngresada.isPresent()){
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(facturaIngresada);
-
+        logger.debug("Obteniendo la factura a identificar");
+        return ResponseEntity.ok(facturaService.findbyId(factura_id));
     }
 
+    @GetMapping(value = "DTO")
+    /**Búsqueda de todas las facturas DTO
+     * @return retorna todas las facturas DTO
+     * @throws ResponseEntity retorna una notificación en donde comenta
+     * que no encontro ninguna factura DTO
+     * */
+    public List<FacturaDTO> buscarFacturaDTO(){
+        logger.debug("Obteniendo las Facturas DTO");
+        return facturaService.findAllFacturaDTO();
+    }
 
 
 }

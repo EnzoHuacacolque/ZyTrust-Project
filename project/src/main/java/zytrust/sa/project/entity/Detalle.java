@@ -10,9 +10,13 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -26,41 +30,30 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FAC_DETALLES")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class Detalle {
+public class Detalle implements Serializable {
+
+    /**UID Serializable*/
+    private static final long serialVersionUID = 1L;
 
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid2")
     @Column(name = "DET_ID", length = 50)
     /**Identificador de los detalles de una factura*/
     private String id;
 
-    @Column(name = "DET_CANTIDAD", length = 20)
+    @Column(name = "DET_CANTIDAD", nullable = false, length = 20)
     /**Cantidad de los productos en una factura*/
     private BigInteger cantidad;
 
-    @Column(name = "DET_IMPORTE", scale = 2, precision = 7)
+    @Column(name = "DET_IMPORTE", nullable = false, scale = 2, precision = 7)
     /**Importe de la factura*/
     private BigDecimal importe;
 
-    //Constructores
-
-    /**Constructor vacío del detalle*/
-    public Detalle() {
-    }
-
-    /**Constructor con propiedades del detalle
-     * @param id
-     * @param cantidad
-     * @param importe
-     * */
-    public Detalle(String id, BigInteger cantidad, BigDecimal importe) {
-        this.id = id;
-        this.cantidad = cantidad;
-        this.importe = importe;
-    }
 
 
     //Relaciones

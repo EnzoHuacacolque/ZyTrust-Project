@@ -10,8 +10,14 @@
 package zytrust.sa.project.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
@@ -25,13 +31,18 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "FAC_PRODUCTOS")
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class Producto {
+public class Producto implements Serializable {
+
+    /**UID Serializable*/
+    private static final long serialVersionUID = 1L;
 
     //Propiedades
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid2")
     @Column(name = "PROD_ID", length = 50)
     /**Identificador del producto*/
     private String id;
@@ -52,25 +63,11 @@ public class Producto {
     /**Precio unitario del producto*/
     private BigDecimal precio;
 
-    //Constructores
 
-    /**Constructor vacío del producto*/
-    public Producto() {
-    }
-
-    /**Constructor con parámetros del producto
-     * @param id
-     * @param nombre
-     * @param descripcion
-     * @param categoria
-     * @param precio
-     * */
-    public Producto(String id, String nombre, String descripcion,
-                    String categoria, BigDecimal precio) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.categoria = categoria;
-        this.precio = precio;
-    }
+    //Relaciones
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "PROD_ID")
+    @JsonIgnore
+    /**Relación con la clase Detalles*/
+    private List<Detalle> detalles;
 }
